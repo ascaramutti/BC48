@@ -1,0 +1,282 @@
+openapi: 3.0.3
+info:
+  title: Servicio Bancario API
+  version: 1.0.0
+tags:
+  - name: client
+  - name: transaction
+paths:
+  /client:
+    post:
+      tags:
+        - client
+      summary: add a new Client
+      description: add a new Client
+      operationId: addClient
+      requestBody:
+        description: creat a new Client
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+        required: true
+      responses:
+        '200':
+          description: Succesful Operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Client'
+    
+    get:
+      tags:
+        - client
+      summary: get all Clients
+      description: get all Clients
+      operationId: getClients
+      responses:
+        '200':
+          description: succesful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+                
+    put:
+      tags:
+        - client
+      summary: update an existing client
+      description: update an existing client
+      operationId: updateClient
+      requestBody:
+        description: update an existing client
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        '200':
+          description: succesful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+                  
+  /client/{documentNumber}:
+    get:
+      tags:
+        - client
+      summary: Find client by documentNumber
+      description: Returns a single client
+      operationId: getClientByDocumentNumber
+      parameters:
+        - name: documentNumber
+          in: path
+          description: documentNumber of client to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+                
+    delete:
+      tags:
+        - client
+      summary: delete a client
+      description: deleta a client by documentNumber
+      operationId: deleteClientByDocumentNumber
+      parameters:
+        - name: documentNumber
+          in: path
+          description: documentNumber of client to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: no content
+                
+  /transaction:
+    post:
+      tags:
+        - transaction
+      summary: create a transaction
+      description: create a transaction
+      operationId: createTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+        required: true
+      responses:
+        '200':
+          description: Succesful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+                
+    put:
+      tags:
+        - transaction
+      summary: update an existing transaction
+      description: update an existing transaction by productId
+      operationId: updateTransactionByProductId
+      requestBody:
+        description: update an existing transaction
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+        required: true
+      responses:
+        '200':
+          description: succesful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+  
+  /transaction/{productId}:
+    get:
+      tags:
+        - transaction
+      summary: get transactions
+      description: get transactions by productId
+      operationId: getTransactionsByProductId
+      parameters:
+        - name: productId
+          in: path
+          description: productId values that need to be considered for filter
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: succesful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+                
+  /transaction/{transactionId}:
+    delete: 
+      tags: 
+        - transaction
+      summary: deletes a transaction
+      description: deletes a transaction by transactionId
+      operationId: deleteTransactionByTransactionId
+      parameters:
+        - name: transactionId
+          in: path
+          description: transaction to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: no contend
+    
+components:
+  schemas:
+    Client:
+      required:
+        - name
+        - documentNumber
+        - clientType
+      type: object
+      properties:
+        clientId:
+          type: string
+        name:
+          type: string
+        documentNumber:
+          type: string
+        clientType:
+          type: string
+          enum:
+            - naturalPerson
+            - company
+        clientProduct:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientProduct'
+    
+    ClientProduct:
+      required:
+        - accountNumber
+        - accountBalance
+      type: object
+      properties: 
+        clientProductId:
+          type: string
+        typeProduct:
+          type: string
+          enum:
+            - savings
+            - checking
+            - fixedTerm
+            - individual
+            - business
+            - creditCard
+        accountNumber:
+          type: string
+        accountHolders:
+          type: array
+          items:
+            $ref: '#/components/schemas/HolderAndSigner'
+        authorizedSignatories:
+          type: array
+          items:
+            $ref: '#/components/schemas/HolderAndSigner'
+        accountBalance:
+          type: number
+          format: double
+      
+    HolderAndSigner:
+      required: 
+        - name
+        - documentNumber
+      type: object
+      properties:
+        holderAndSignerId:
+          type: string
+        name:
+          type: string
+        documentNumber:
+          type: string
+        
+    
+    Transaction:
+      required:
+        - typeTransaction
+        - amount
+        - date
+        - productId  
+      type: object
+      properties:
+        transactionId:
+          type: string
+        typeTransaction:
+          type: string
+          enum:
+            - credit
+            - debit
+        amount:
+          type: number
+          format: double
+        date:
+          type: string
+          format: date-time
+        productId:
+          type: string

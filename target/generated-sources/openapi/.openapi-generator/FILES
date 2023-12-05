@@ -1,0 +1,10 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/main/java/com/BootCamp38/model/Client.java
+src/main/java/com/BootCamp38/model/ClientProduct.java
+src/main/java/com/BootCamp38/model/HolderAndSigner.java
+src/main/java/com/BootCamp38/model/Transaction.java
+src/main/java/com/BootCamp38/rest/contract/ApiUtil.java
+src/main/java/com/BootCamp38/rest/contract/ClientApi.java
+src/main/java/com/BootCamp38/rest/contract/TransactionApi.java
