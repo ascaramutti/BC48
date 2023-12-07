@@ -12,12 +12,12 @@ import java.util.List;
 @Builder
 @ToString
 @Data
-@Document(collection = "client")
+@Document(collection = "clients")
 public class ClientDocument {
     private ObjectId _id;
     private String clientId;
     private String name;
     private String documentNumber;
     private String clientType;
-    private List<ClientProductDocument> clientProduct;
+    private List<ClientProductDocument> clientProducts;
 }

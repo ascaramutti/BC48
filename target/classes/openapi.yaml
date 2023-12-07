@@ -2,14 +2,15 @@ openapi: 3.0.3
 info:
   title: Servicio Bancario API
   version: 1.0.0
+
 tags:
-  - name: client
-  - name: transaction
+  - name: clients
+  - name: transactions
 paths:
-  /client:
+  /clients:
     post:
       tags:
-        - client
+        - clients
       summary: add a new Client
       description: add a new Client
       operationId: addClient
@@ -30,7 +31,7 @@ paths:
     
     get:
       tags:
-        - client
+        - clients
       summary: get all Clients
       description: get all Clients
       operationId: getClients
@@ -46,7 +47,7 @@ paths:
                 
     put:
       tags:
-        - client
+        - clients
       summary: update an existing client
       description: update an existing client
       operationId: updateClient
@@ -64,10 +65,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Client'
                   
-  /client/{documentNumber}:
+  /clients/{documentNumber}:
     get:
       tags:
-        - client
+        - clients
       summary: Find client by documentNumber
       description: Returns a single client
       operationId: getClientByDocumentNumber
@@ -88,7 +89,7 @@ paths:
                 
     delete:
       tags:
-        - client
+        - clients
       summary: delete a client
       description: deleta a client by documentNumber
       operationId: deleteClientByDocumentNumber
@@ -103,10 +104,10 @@ paths:
         '204':
           description: no content
                 
-  /transaction:
+  /transactions:
     post:
       tags:
-        - transaction
+        - transactions
       summary: create a transaction
       description: create a transaction
       operationId: createTransaction
@@ -126,7 +127,7 @@ paths:
                 
     put:
       tags:
-        - transaction
+        - transactions
       summary: update an existing transaction
       description: update an existing transaction by productId
       operationId: updateTransactionByProductId
@@ -145,10 +146,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Transaction'
   
-  /transaction/{productId}:
+  /transactions/{productId}:
     get:
       tags:
-        - transaction
+        - transactions
       summary: get transactions
       description: get transactions by productId
       operationId: getTransactionsByProductId
@@ -169,10 +170,10 @@ paths:
                 items:
                   $ref: '#/components/schemas/Transaction'
                 
-  /transaction/{transactionId}:
+  /transactions/{transactionId}:
     delete: 
       tags: 
-        - transaction
+        - transactions
       summary: deletes a transaction
       description: deletes a transaction by transactionId
       operationId: deleteTransactionByTransactionId
@@ -189,6 +190,7 @@ paths:
     
 components:
   schemas:
+
     Client:
       required:
         - name
@@ -204,31 +206,18 @@ components:
           type: string
         clientType:
           type: string
-          enum:
-            - naturalPerson
-            - company
-        clientProduct:
+        clientProducts:
           type: array
           items:
             $ref: '#/components/schemas/ClientProduct'
     
     ClientProduct:
-      required:
-        - accountNumber
-        - accountBalance
       type: object
       properties: 
         clientProductId:
           type: string
         typeProduct:
           type: string
-          enum:
-            - savings
-            - checking
-            - fixedTerm
-            - individual
-            - business
-            - creditCard
         accountNumber:
           type: string
         accountHolders:
@@ -255,8 +244,7 @@ components:
           type: string
         documentNumber:
           type: string
-        
-    
+
     Transaction:
       required:
         - typeTransaction
@@ -269,9 +257,6 @@ components:
           type: string
         typeTransaction:
           type: string
-          enum:
-            - credit
-            - debit
         amount:
           type: number
           format: double

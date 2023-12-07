@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -24,49 +23,14 @@ import javax.annotation.Generated;
 @lombok.NoArgsConstructor
 @lombok.AllArgsConstructor
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-12-05T16:37:41.514380-05:00[America/Lima]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-12-07T15:54:48.392513-05:00[America/Lima]")
 public class Transaction {
 
   @JsonProperty("transactionId")
   private String transactionId;
 
-  /**
-   * Gets or Sets typeTransaction
-   */
-  public enum TypeTransactionEnum {
-    CREDIT("credit"),
-    
-    DEBIT("debit");
-
-    private String value;
-
-    TypeTransactionEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static TypeTransactionEnum fromValue(String value) {
-      for (TypeTransactionEnum b : TypeTransactionEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
   @JsonProperty("typeTransaction")
-  private TypeTransactionEnum typeTransaction;
+  private String typeTransaction;
 
   @JsonProperty("amount")
   private Double amount;
@@ -97,7 +61,7 @@ public class Transaction {
     this.transactionId = transactionId;
   }
 
-  public Transaction typeTransaction(TypeTransactionEnum typeTransaction) {
+  public Transaction typeTransaction(String typeTransaction) {
     this.typeTransaction = typeTransaction;
     return this;
   }
@@ -108,11 +72,11 @@ public class Transaction {
   */
   @NotNull 
   @Schema(name = "typeTransaction", requiredMode = Schema.RequiredMode.REQUIRED)
-  public TypeTransactionEnum getTypeTransaction() {
+  public String getTypeTransaction() {
     return typeTransaction;
   }
 
-  public void setTypeTransaction(TypeTransactionEnum typeTransaction) {
+  public void setTypeTransaction(String typeTransaction) {
     this.typeTransaction = typeTransaction;
   }
 

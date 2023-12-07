@@ -2,10 +2,9 @@ package com.BootCamp38.GestionBancaria.controllers;
 
 import com.BootCamp38.GestionBancaria.services.ClientService;
 import com.BootCamp38.model.Client;
-import com.BootCamp38.rest.contract.ClientApi;
+import com.BootCamp38.rest.contract.ClientsApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +14,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api")
-public class ClientController implements ClientApi {
+public class ClientController implements ClientsApi {
 
     @Autowired
     private ClientService clientService;

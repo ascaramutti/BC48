@@ -5,7 +5,6 @@ import java.util.Objects;
 import com.BootCamp38.model.ClientProduct;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -25,7 +24,7 @@ import javax.annotation.Generated;
 @lombok.NoArgsConstructor
 @lombok.AllArgsConstructor
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-12-05T16:37:41.514380-05:00[America/Lima]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-12-07T15:54:48.392513-05:00[America/Lima]")
 public class Client {
 
   @JsonProperty("clientId")
@@ -37,47 +36,12 @@ public class Client {
   @JsonProperty("documentNumber")
   private String documentNumber;
 
-  /**
-   * Gets or Sets clientType
-   */
-  public enum ClientTypeEnum {
-    NATURALPERSON("naturalPerson"),
-    
-    COMPANY("company");
-
-    private String value;
-
-    ClientTypeEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static ClientTypeEnum fromValue(String value) {
-      for (ClientTypeEnum b : ClientTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
   @JsonProperty("clientType")
-  private ClientTypeEnum clientType;
+  private String clientType;
 
-  @JsonProperty("clientProduct")
+  @JsonProperty("clientProducts")
   @Valid
-  private List<ClientProduct> clientProduct = null;
+  private List<ClientProduct> clientProducts = null;
 
   public Client clientId(String clientId) {
     this.clientId = clientId;
@@ -136,7 +100,7 @@ public class Client {
     this.documentNumber = documentNumber;
   }
 
-  public Client clientType(ClientTypeEnum clientType) {
+  public Client clientType(String clientType) {
     this.clientType = clientType;
     return this;
   }
@@ -147,39 +111,39 @@ public class Client {
   */
   @NotNull 
   @Schema(name = "clientType", requiredMode = Schema.RequiredMode.REQUIRED)
-  public ClientTypeEnum getClientType() {
+  public String getClientType() {
     return clientType;
   }
 
-  public void setClientType(ClientTypeEnum clientType) {
+  public void setClientType(String clientType) {
     this.clientType = clientType;
   }
 
-  public Client clientProduct(List<ClientProduct> clientProduct) {
-    this.clientProduct = clientProduct;
+  public Client clientProducts(List<ClientProduct> clientProducts) {
+    this.clientProducts = clientProducts;
     return this;
   }
 
-  public Client addClientProductItem(ClientProduct clientProductItem) {
-    if (this.clientProduct == null) {
-      this.clientProduct = new ArrayList<>();
+  public Client addClientProductsItem(ClientProduct clientProductsItem) {
+    if (this.clientProducts == null) {
+      this.clientProducts = new ArrayList<>();
     }
-    this.clientProduct.add(clientProductItem);
+    this.clientProducts.add(clientProductsItem);
     return this;
   }
 
   /**
-   * Get clientProduct
-   * @return clientProduct
+   * Get clientProducts
+   * @return clientProducts
   */
   @Valid 
-  @Schema(name = "clientProduct", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public List<ClientProduct> getClientProduct() {
-    return clientProduct;
+  @Schema(name = "clientProducts", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public List<ClientProduct> getClientProducts() {
+    return clientProducts;
   }
 
-  public void setClientProduct(List<ClientProduct> clientProduct) {
-    this.clientProduct = clientProduct;
+  public void setClientProducts(List<ClientProduct> clientProducts) {
+    this.clientProducts = clientProducts;
   }
 
   @Override
@@ -195,12 +159,12 @@ public class Client {
         Objects.equals(this.name, client.name) &&
         Objects.equals(this.documentNumber, client.documentNumber) &&
         Objects.equals(this.clientType, client.clientType) &&
-        Objects.equals(this.clientProduct, client.clientProduct);
+        Objects.equals(this.clientProducts, client.clientProducts);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(clientId, name, documentNumber, clientType, clientProduct);
+    return Objects.hash(clientId, name, documentNumber, clientType, clientProducts);
   }
 
   @Override
@@ -211,7 +175,7 @@ public class Client {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    documentNumber: ").append(toIndentedString(documentNumber)).append("\n");
     sb.append("    clientType: ").append(toIndentedString(clientType)).append("\n");
-    sb.append("    clientProduct: ").append(toIndentedString(clientProduct)).append("\n");
+    sb.append("    clientProducts: ").append(toIndentedString(clientProducts)).append("\n");
     sb.append("}");
     return sb.toString();
   }

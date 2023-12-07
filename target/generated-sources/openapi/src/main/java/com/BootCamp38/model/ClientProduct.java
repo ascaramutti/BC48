@@ -5,7 +5,6 @@ import java.util.Objects;
 import com.BootCamp38.model.HolderAndSigner;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -25,57 +24,14 @@ import javax.annotation.Generated;
 @lombok.NoArgsConstructor
 @lombok.AllArgsConstructor
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-12-05T16:37:41.514380-05:00[America/Lima]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-12-07T15:54:48.392513-05:00[America/Lima]")
 public class ClientProduct {
 
   @JsonProperty("clientProductId")
   private String clientProductId;
 
-  /**
-   * Gets or Sets typeProduct
-   */
-  public enum TypeProductEnum {
-    SAVINGS("savings"),
-    
-    CHECKING("checking"),
-    
-    FIXEDTERM("fixedTerm"),
-    
-    INDIVIDUAL("individual"),
-    
-    BUSINESS("business"),
-    
-    CREDITCARD("creditCard");
-
-    private String value;
-
-    TypeProductEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static TypeProductEnum fromValue(String value) {
-      for (TypeProductEnum b : TypeProductEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
   @JsonProperty("typeProduct")
-  private TypeProductEnum typeProduct;
+  private String typeProduct;
 
   @JsonProperty("accountNumber")
   private String accountNumber;
@@ -110,7 +66,7 @@ public class ClientProduct {
     this.clientProductId = clientProductId;
   }
 
-  public ClientProduct typeProduct(TypeProductEnum typeProduct) {
+  public ClientProduct typeProduct(String typeProduct) {
     this.typeProduct = typeProduct;
     return this;
   }
@@ -121,11 +77,11 @@ public class ClientProduct {
   */
   
   @Schema(name = "typeProduct", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public TypeProductEnum getTypeProduct() {
+  public String getTypeProduct() {
     return typeProduct;
   }
 
-  public void setTypeProduct(TypeProductEnum typeProduct) {
+  public void setTypeProduct(String typeProduct) {
     this.typeProduct = typeProduct;
   }
 
@@ -138,8 +94,8 @@ public class ClientProduct {
    * Get accountNumber
    * @return accountNumber
   */
-  @NotNull 
-  @Schema(name = "accountNumber", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "accountNumber", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public String getAccountNumber() {
     return accountNumber;
   }
@@ -211,8 +167,8 @@ public class ClientProduct {
    * Get accountBalance
    * @return accountBalance
   */
-  @NotNull 
-  @Schema(name = "accountBalance", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "accountBalance", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   public Double getAccountBalance() {
     return accountBalance;
   }
