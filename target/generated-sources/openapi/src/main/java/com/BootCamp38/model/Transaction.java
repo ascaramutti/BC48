@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @lombok.NoArgsConstructor
 @lombok.AllArgsConstructor
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-12-07T15:54:48.392513-05:00[America/Lima]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-12-12T17:38:25.931183-05:00[America/Lima]")
 public class Transaction {
 
   @JsonProperty("transactionId")
